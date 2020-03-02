@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./components/navbar";
 import { Route, Redirect, Switch } from "react-router-dom";
 import CheckList from "./components/checkList";
-import NewForm from "./components/newForm";
+import NewForm from "./components/form";
 import Records from "./components/records";
 import "./App.css";
 
