@@ -2,61 +2,60 @@ import React, { Component } from "react";
 import TextInput from "./common/textInput";
 import Enum from "./common/Enum";
 import ImageInput from "./common/imageInput";
+import Joi from "joi-browser";
 
 class Form extends Component {
   state = {
-    caseid: { name: "CaseId", value: "", type: "text" },
-    dateOfVisit: { name: "Date", value: "", type: "text" },
-    staff: {
-      id: "staffCheckbox",
-      name: "Please select staff who has visited the site: ",
-      value: "",
-      enum: ["Lung", "Kenny"]
-    },
-    didCheckIn: {
-      id: "didCheckIn",
-      name: "Did you check in?",
-      value: "",
-      enum: ["Yes", "No"]
-    },
-    photo: {
-      id: "photoInput",
-      name: "Submit Check In Photo: ",
-      value: "",
-      type: "text"
+    data: {
+      caseid: { id: "caseid", name: "CaseId", value: "", type: "text" },
+      dateOfVisit: { id: "dateOfVisit", name: "Date", value: "", type: "text" },
+      staff: {
+        id: "staff",
+        name: "Please select staff who has visited the site: ",
+        value: "",
+        enum: ["Lung", "Kenny"]
+      },
+      didCheckIn: {
+        id: "didCheckIn",
+        name: "Did you check in?",
+        value: "",
+        enum: ["Yes", "No"]
+      },
+      photo: {
+        id: "photo",
+        name: "Submit Check In Photo: ",
+        value: "",
+        type: "text"
+      }
     }
   };
 
   handleChange = e => {
-    console.log(e.currentTarget.id);
-    const caseid = { ...this.state.caseid };
-    const staff = { ...this.state.staff };
-    const didCheckIn = { ...this.state.didCheckIn };
-    const photo = { ...this.state.photo };
-    if (e.currentTarget.id === this.state.staff.name)
-      caseid.value = e.currentTarget.value;
-    if (e.currentTarget.id === this.state.staff.id)
-      staff.value = e.currentTarget.value;
-    if (e.currentTarget.id === this.state.didCheckIn.id)
-      didCheckIn.value = e.currentTarget.value;
-    if (e.currentTarget.id === this.state.photo.id)
-      photo.value = e.currentTarget.value;
+    console.log();
+    const data = { ...this.state.data };
+    data[e.currentTarget.id].value = e.currentTarget.value;
+    this.setState({ data });
+  };
 
-    this.setState({ caseid, staff, didCheckIn, photo });
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log("submitted.w");
   };
 
   render() {
-    const { caseid, dateOfVisit, staff, didCheckIn, photo } = this.state;
+    const { caseid, dateOfVisit, staff, didCheckIn, photo } = this.state.data;
     return (
       <React.Fragment>
-        <form className="container">
+        <form onSubmit={this.handleSubmit} className="container">
           <TextInput
+            id={caseid.id}
             name={caseid.name}
             value={caseid.value}
             type={caseid.type}
             onChange={this.handleChange}
           />
           <TextInput
+            id={dateOfVisit.id}
             name={dateOfVisit.name}
             value={dateOfVisit.value}
             type={dateOfVisit.type}
@@ -82,6 +81,9 @@ class Form extends Component {
             value={photo.value}
             onChange={this.handleChange}
           />
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
         </form>
       </React.Fragment>
     );

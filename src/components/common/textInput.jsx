@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const TextInput = ({ name, value, type, onChange }) => {
+const TextInput = ({ id, name, value, type, onChange }) => {
   return (
     <React.Fragment>
       <div class="input-group" style={{ margin: 5 }}>
@@ -13,7 +13,8 @@ const TextInput = ({ name, value, type, onChange }) => {
           value={value}
           type={type}
           class="form-control"
-          id={name}
+          id={id}
+          name={name}
           onChange={onChange}
         />
       </div>
