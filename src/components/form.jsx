@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TextInput from "./common/textInput";
 import Enum from "./common/Enum";
+import ImageInput from "./common/imageInput";
 
 class Form extends Component {
   state = {
@@ -12,20 +13,36 @@ class Form extends Component {
       value: "",
       enum: ["Lung", "Kenny"]
     },
-    didCheckIn: { name: "Check-In", value: "", type: "checkbox" },
-    photo: { name: "Photo", value: "", type: "text" }
+    didCheckIn: {
+      id: "didCheckIn",
+      name: "Did you check in?",
+      value: "",
+      enum: ["Yes", "No"]
+    },
+    photo: {
+      id: "photoInput",
+      name: "Submit Check In Photo: ",
+      value: "",
+      type: "text"
+    }
   };
 
   handleChange = e => {
     console.log(e.currentTarget.id);
     const caseid = { ...this.state.caseid };
     const staff = { ...this.state.staff };
+    const didCheckIn = { ...this.state.didCheckIn };
+    const photo = { ...this.state.photo };
     if (e.currentTarget.id === this.state.staff.name)
       caseid.value = e.currentTarget.value;
     if (e.currentTarget.id === this.state.staff.id)
       staff.value = e.currentTarget.value;
+    if (e.currentTarget.id === this.state.didCheckIn.id)
+      didCheckIn.value = e.currentTarget.value;
+    if (e.currentTarget.id === this.state.photo.id)
+      photo.value = e.currentTarget.value;
 
-    this.setState({ caseid, staff });
+    this.setState({ caseid, staff, didCheckIn, photo });
   };
 
   render() {
@@ -50,6 +67,19 @@ class Form extends Component {
             name={staff.name}
             value={staff.value}
             enum={staff.enum}
+            onChange={this.handleChange}
+          />
+          <Enum
+            id={didCheckIn.id}
+            name={didCheckIn.name}
+            value={didCheckIn.value}
+            enum={didCheckIn.enum}
+            onChange={this.handleChange}
+          />
+          <ImageInput
+            id={photo.id}
+            name={photo.name}
+            value={photo.value}
             onChange={this.handleChange}
           />
         </form>

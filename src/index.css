@@ -1,3 +1,10 @@
+.custom-form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px 20px 0px;
+  align-items: start;
+}
+
 .enumlist {
   display: flex;
   flex-direction: column;
