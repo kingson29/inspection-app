@@ -1,31 +1,15 @@
 .enumlist {
   display: flex;
-  flex-direction: row;
-  margin: 20px;
-  align-items: center;
-}
-
-.enum-button {
-  display: flex;
-  border: 1px solid rgb(155, 155, 255);
-  border-radius: 10px;
-  width: 100px;
-  height: 40px;
-  margin-right: 20px;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(195, 225, 255);
-}
-
-.enum-button:hover {
-  background-color: rgb(115, 181, 247);
-}
-
-.enum-button:active {
-  background-color: rgb(66, 155, 245);
+  flex-direction: column;
+  margin: 20px 20px 20px 0px;
+  align-items: start;
 }
 
 .enum-label {
   margin: 10px 10px;
-  width: 150px;
+  width: 300px;
+}
+
+.btn {
+  margin: 15px;
 }

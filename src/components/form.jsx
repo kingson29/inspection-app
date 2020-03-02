@@ -6,15 +6,26 @@ class Form extends Component {
   state = {
     caseid: { name: "CaseId", value: "", type: "text" },
     dateOfVisit: { name: "Date", value: "", type: "text" },
-    staff: { name: "Staff", value: "", enum: ["Lung", "Kenny"] },
+    staff: {
+      id: "staffCheckbox",
+      name: "Please select staff who has visited the site: ",
+      value: "",
+      enum: ["Lung", "Kenny"]
+    },
     didCheckIn: { name: "Check-In", value: "", type: "checkbox" },
     photo: { name: "Photo", value: "", type: "text" }
   };
 
   handleChange = e => {
+    console.log(e.currentTarget.id);
     const caseid = { ...this.state.caseid };
-    caseid.value = e.currentTarget.value;
-    this.setState({ caseid });
+    const staff = { ...this.state.staff };
+    if (e.currentTarget.id === this.state.staff.name)
+      caseid.value = e.currentTarget.value;
+    if (e.currentTarget.id === this.state.staff.id)
+      staff.value = e.currentTarget.value;
+
+    this.setState({ caseid, staff });
   };
 
   render() {
@@ -34,7 +45,13 @@ class Form extends Component {
             type={dateOfVisit.type}
             onChange={this.handleChange}
           />
-          <Enum name={staff.name} enum={staff.enum} />
+          <Enum
+            id={staff.id}
+            name={staff.name}
+            value={staff.value}
+            enum={staff.enum}
+            onChange={this.handleChange}
+          />
         </form>
       </React.Fragment>
     );
